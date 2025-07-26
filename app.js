@@ -132,6 +132,115 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Infinite Typewriter Animation
+document.addEventListener('DOMContentLoaded', function () {
+    const typewriterElements = document.querySelectorAll('.typewriter-text');
+
+    function startInfiniteTypewriter(element, delay = 0) {
+        const text = element.getAttribute('data-text') || element.textContent.trim();
+        const typeSpeed = 100; // milliseconds per character when typing
+        const eraseSpeed = 50; // milliseconds per character when erasing
+        const pauseTime = 2000; // pause time after typing complete
+        const eraseDelay = 1000; // delay before starting to erase
+        
+        // Store original text and clear element
+        element.setAttribute('data-original-text', text);
+        element.textContent = '';
+        element.classList.add('typing');
+
+        function typeText() {
+            let i = 0;
+            const typeInterval = setInterval(() => {
+                element.textContent = text.slice(0, i + 1);
+                i++;
+
+                if (i > text.length) {
+                    clearInterval(typeInterval);
+                    // Pause before erasing
+                    setTimeout(() => {
+                        eraseText();
+                    }, pauseTime);
+                }
+            }, typeSpeed);
+        }
+
+        function eraseText() {
+            let i = text.length;
+            const eraseInterval = setInterval(() => {
+                element.textContent = text.slice(0, i - 1);
+                i--;
+
+                if (i <= 0) {
+                    clearInterval(eraseInterval);
+                    // Pause before typing again
+                    setTimeout(() => {
+                        typeText();
+                    }, eraseDelay);
+                }
+            }, eraseSpeed);
+        }
+
+        // Start the infinite loop after initial delay
+        setTimeout(() => {
+            typeText();
+        }, delay);
+    }
+
+    // Start infinite typewriter animations
+    if (typewriterElements.length > 0) {
+        typewriterElements.forEach((element, index) => {
+            const delay = parseInt(element.getAttribute('data-delay')) || 800;
+            startInfiniteTypewriter(element, delay);
+        });
+    }
+});
+
+// Intersection Observer for typewriter on scroll (for about page)
+document.addEventListener('DOMContentLoaded', function () {
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.target.classList.contains('about-text')) {
+                const paragraphs = entry.target.querySelectorAll('p');
+                paragraphs.forEach((p, index) => {
+                    if (!p.classList.contains('typewriter-animated')) {
+                        p.classList.add('typewriter-animated');
+                        animateTextReveal(p, index * 800);
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    const aboutText = document.querySelector('.about-text');
+    if (aboutText) {
+        observer.observe(aboutText);
+    }
+});
+
+// Text reveal animation for about section
+function animateTextReveal(element, delay) {
+    const text = element.textContent;
+    element.textContent = '';
+    element.style.opacity = '1';
+
+    setTimeout(() => {
+        let i = 0;
+        const revealInterval = setInterval(() => {
+            element.textContent = text.slice(0, i + 1);
+            i++;
+
+            if (i >= text.length) {
+                clearInterval(revealInterval);
+            }
+        }, 30);
+    }, delay);
+}
+
 // Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');

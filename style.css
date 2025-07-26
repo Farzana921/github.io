@@ -84,6 +84,56 @@ body.menu-open {
     overflow: hidden;
 }
 
+/* Infinite Typewriter Animation */
+.typewriter-text {
+    position: relative;
+    display: inline-block;
+}
+
+.typewriter-text.typing::after {
+    content: '|';
+    color: var(--accent-primary);
+    animation: blink 1s infinite;
+    font-weight: normal;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { 
+        opacity: 1; 
+    }
+    51%, 100% { 
+        opacity: 0; 
+    }
+}
+
+/* Specific typewriter styling */
+.hero-title.typewriter-text {
+    display: inline-block;
+}
+
+/* About section text reveal animation */
+.about-text p {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.about-text p.typewriter-animated {
+    opacity: 1;
+}
+
+/* Smooth reveal for other sections */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -304,7 +354,7 @@ body.dark-theme .theme-icon {
     left: 4px;
     right: 4px;
     bottom: 4px;
-    background: linear-gradient(135deg, #00d4ff 0%, #245210 50%, #b8e994 100%);
+    background: linear-gradient(135deg, #00d4ff 0%, #2295c2 50%, #b8e994 100%);
     clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
     opacity: 0.3;
     z-index: 1;
@@ -1408,6 +1458,8 @@ body.dark-theme .theme-icon {
     .stat-number {
         font-size: 2rem;
     }
+    
+
 
     .container {
         padding: 0 15px;

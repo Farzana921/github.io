@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// EmailJS Configuration
+(function() {
+    // Initialize EmailJS with your public key
+    emailjs.init("obL0CmcIlU-7DcNXD"); // Replace with your actual EmailJS public key
+})();
+
 // Contact Form Functionality
 document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
@@ -58,9 +64,39 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // Simulate form submission
-            showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
-            contactForm.reset();
+            // Show loading state
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+
+            // Prepare template parameters
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                reply_to: email,
+                subject: subject,
+                message: message,
+                to_email: 'mustafahusaini754@gmail.com', // Your email address
+                sender_info: `${name} (${email})` // Combined sender info for easy viewing
+            };
+
+            // Send email using EmailJS
+            emailjs.send('service_nb0asub', 'template_t1c0h87', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+                    contactForm.reset();
+                })
+                .catch(function(error) {
+                    console.error('Email sending failed:', error);
+                    showNotification('Sorry, there was an error sending your message. Please try again or contact me directly.', 'error');
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                });
         });
     }
 });

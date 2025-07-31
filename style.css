@@ -111,13 +111,17 @@ body.menu-open {
     display: inline-block;
 }
 
-/* About section text reveal animation */
+/* About section fade-in animation */
 .about-text p {
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    opacity: 1;
+    transition: opacity 0.6s ease;
 }
 
-.about-text p.typewriter-animated {
+.about-text.animate-on-scroll p {
+    opacity: 0;
+}
+
+.about-text.animate-on-scroll p.fade-animated {
     opacity: 1;
 }
 
@@ -206,7 +210,7 @@ body.menu-open {
 .theme-toggle {
     background: var(--accent-primary);
     border: none;
-    border-radius: 50%;
+    border-radius: 5px;
     width: 40px;
     height: 40px;
     cursor: pointer;
@@ -214,12 +218,10 @@ body.menu-open {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px var(--shadow);
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 15px var(--shadow);
+    background: var(--accent-secondary);
 }
 
 .theme-icon {
@@ -311,13 +313,13 @@ body.dark-theme .theme-icon {
     align-items: center;
 }
 
-.hexagon-container {
+.square-container {
     position: relative;
     width: 400px;
     height: 400px;
 }
 
-.hexagon-glow {
+.square-glow {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -325,13 +327,13 @@ body.dark-theme .theme-icon {
     width: 350px;
     height: 350px;
     background: conic-gradient(from 0deg, #00d4ff, #00d4ff, #00d4ff, #00b4d8, #00d4ff);
-    clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+    border-radius: 20px;
     filter: blur(20px);
     opacity: 0.8;
     animation: rotate 10s linear infinite;
 }
 
-.hexagon-border {
+.square-border {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -339,14 +341,14 @@ body.dark-theme .theme-icon {
     width: 320px;
     height: 320px;
     background: linear-gradient(45deg, #00d4ff, #00d4ff, #00d4ff, #00b4d8);
-    clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+    border-radius: 15px;
     padding: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.hexagon-border::before {
+.square-border::before {
     content: '';
     position: absolute;
     top: 4px;
@@ -354,7 +356,7 @@ body.dark-theme .theme-icon {
     right: 4px;
     bottom: 4px;
     background: linear-gradient(135deg, #00d4ff 0%, #2295c2 50%, #b8e994 100%);
-    clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+    border-radius: 12px;
     opacity: 0.3;
     z-index: 1;
 }
@@ -363,8 +365,7 @@ body.dark-theme .theme-icon {
     width: 300px;
     height: 300px;
     object-fit: cover;
-    clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
-    border-radius: 0;
+    border-radius: 12px;
     position: relative;
     z-index: 2;
 }
@@ -1310,17 +1311,17 @@ body.dark-theme .theme-icon {
         order: -1;
     }
 
-    .hexagon-container {
+    .square-container {
         width: 300px;
         height: 300px;
     }
 
-    .hexagon-glow {
+    .square-glow {
         width: 260px;
         height: 260px;
     }
 
-    .hexagon-border {
+    .square-border {
         width: 240px;
         height: 240px;
     }
@@ -1421,17 +1422,17 @@ body.dark-theme .theme-icon {
         padding: 80px 0 40px;
     }
 
-    .hexagon-container {
+    .square-container {
         width: 250px;
         height: 250px;
     }
 
-    .hexagon-glow {
+    .square-glow {
         width: 220px;
         height: 220px;
     }
 
-    .hexagon-border {
+    .square-border {
         width: 200px;
         height: 200px;
     }

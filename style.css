@@ -208,8 +208,8 @@ body.menu-open {
 
 /* Theme Toggle */
 .theme-toggle {
-    background: var(--accent-primary);
-    border: none;
+    background: #2c3e50;
+    border: 2px solid #2c3e50;
     border-radius: 5px;
     width: 40px;
     height: 40px;
@@ -221,12 +221,35 @@ body.menu-open {
 }
 
 .theme-toggle:hover {
-    background: var(--accent-secondary);
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.theme-toggle:hover .theme-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* Dark theme toggle styling */
+body.dark-theme .theme-toggle {
+    background: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+body.dark-theme .theme-toggle:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+body.dark-theme .theme-toggle .theme-icon {
+    filter: brightness(0) invert(0.2);
 }
 
 .theme-icon {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease;
+    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);
 }
 
 body.dark-theme .theme-icon {
@@ -1543,31 +1566,7 @@ body.dark-theme .theme-icon {
     gap: 30px;
 }
 
-.project-card {
-    background-color: #00264d;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
-    width: 260px;
-}
 
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-}
-
-.project-card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-}
-
-.project-card h3 {
-    margin: 10px;
-    font-size: 1.2rem;
-    color: #00d4ff;
-}
 /* Notification Styles */
 .notification {
     position: fixed;

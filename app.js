@@ -10,21 +10,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // Apply the saved theme
     if (currentTheme === 'dark') {
         body.classList.add('dark-theme');
-        themeIcon.textContent = '☀️';
-    } else {
-        themeIcon.textContent = '🌙';
+        if (themeIcon) {
+            themeIcon.style.transform = 'rotate(180deg)';
+        }
     }
 
     // Theme toggle event listener
     themeToggle.addEventListener('click', function () {
         body.classList.toggle('dark-theme');
 
-        // Update icon and save preference
+        // Update icon rotation and save preference
         if (body.classList.contains('dark-theme')) {
-            themeIcon.textContent = '☀️';
+            if (themeIcon) {
+                themeIcon.style.transform = 'rotate(180deg)';
+            }
             localStorage.setItem('theme', 'dark');
         } else {
-            themeIcon.textContent = '🌙';
+            if (themeIcon) {
+                themeIcon.style.transform = 'rotate(0deg)';
+            }
             localStorage.setItem('theme', 'light');
         }
     });
